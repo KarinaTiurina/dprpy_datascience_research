@@ -41,13 +41,10 @@ class DataScienceQuestionAnalyzer:
         return question_counter.most_common(num_questions)
 
 
-# Usage of the class
-file_path = 'datascience.stackexchange.com/Posts.xml'  # Replace with your file path
+file_path = 'datascience.stackexchange.com/Posts.xml'
 ds_analyzer = DataScienceQuestionAnalyzer(file_path)
 
-# Load and filter posts
 ds_analyzer.load_and_filter_posts()
 
-# Get the most common data science questions
 most_common_ds_questions = ds_analyzer.get_most_common_questions()
 print(most_common_ds_questions)
