@@ -4,7 +4,7 @@ import re
 from collections import Counter
 
 
-class AIQuestionAnalyzer:
+class AISEQuestionAnalyzer:
     def __init__(self, file_path):
         self.file_path = file_path
         self.ai_related_tags = {'artificial-intelligence', 'neural-networks', 'machine-learning',
@@ -18,7 +18,7 @@ class AIQuestionAnalyzer:
         cleanr = re.compile('<.*?>')
         return re.sub(cleanr, '', raw_html)
 
-    def load_and_filter_posts(self):
+    def load_and_filter_questions(self):
         tree = ET.parse(self.file_path)
         root = tree.getroot()
 
@@ -44,7 +44,7 @@ class AIQuestionAnalyzer:
         return question_counter.most_common(num_questions)
 
 file_path_ai = 'ai.stackexchange.com/Posts.xml'
-ai_analyzer = AIQuestionAnalyzer(file_path_ai)
+ai_analyzer = AISEQuestionAnalyzer(file_path_ai)
 
 ai_analyzer.load_and_filter_posts()
 

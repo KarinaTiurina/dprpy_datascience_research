@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 import re
 from collections import Counter
 
-class DataScienceQuestionAnalyzer:
+class DataScienceSEQuestionAnalyzer:
     def __init__(self, file_path):
         self.file_path = file_path
         self.ds_related_tags = {'data-science', 'machine-learning', 'statistics', 'data-analysis', 'python',
@@ -15,7 +15,7 @@ class DataScienceQuestionAnalyzer:
         cleanr = re.compile('<.*?>')
         return re.sub(cleanr, '', raw_html)
 
-    def load_and_filter_posts(self):
+    def load_and_filter_questions(self):
         tree = ET.parse(self.file_path)
         root = tree.getroot()
 
@@ -42,7 +42,7 @@ class DataScienceQuestionAnalyzer:
 
 
 file_path = 'datascience.stackexchange.com/Posts.xml'
-ds_analyzer = DataScienceQuestionAnalyzer(file_path)
+ds_analyzer = DataScienceSEQuestionAnalyzer(file_path)
 
 ds_analyzer.load_and_filter_posts()
 

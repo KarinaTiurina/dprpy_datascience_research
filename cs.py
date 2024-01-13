@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 import re
 from collections import Counter
 
-class ComputerScienceQuestionAnalyzer:
+class ComputerScienceSEQuestionAnalyzer:
     def __init__(self, file_path):
         self.file_path = file_path
         self.cs_related_tags = {'computer-science', 'algorithms', 'data-structures', 'programming',
@@ -16,7 +16,7 @@ class ComputerScienceQuestionAnalyzer:
         cleanr = re.compile('<.*?>')
         return re.sub(cleanr, '', raw_html)
 
-    def load_and_filter_posts(self):
+    def load_and_filter_questions(self):
         tree = ET.parse(self.file_path)
         root = tree.getroot()
 
@@ -42,7 +42,7 @@ class ComputerScienceQuestionAnalyzer:
         return question_counter.most_common(num_questions)
 
 file_path_cs = 'cs.stackexchange.com/Posts.xml'
-cs_analyzer = ComputerScienceQuestionAnalyzer(file_path_cs)
+cs_analyzer = ComputerScienceSEQuestionAnalyzer(file_path_cs)
 
 cs_analyzer.load_and_filter_posts()
 
