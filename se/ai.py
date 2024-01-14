@@ -3,12 +3,14 @@ import xml.etree.ElementTree as ET
 import re
 from collections import Counter
 
-class ComputerScienceSEQuestionAnalyzer:
+
+class AISEQuestionAnalyzer:
     def __init__(self, file_path):
         self.file_path = file_path
-        self.cs_related_tags = {'computer-science', 'algorithms', 'data-structures', 'programming',
-                                'computer-architecture', 'networking', 'databases', 'operating-systems',
-                                'software-engineering', 'theoretical-computer-science'}
+        self.ai_related_tags = {'artificial-intelligence', 'neural-networks', 'machine-learning',
+                                'deep-learning', 'reinforcement-learning', 'natural-language-processing',
+                                'computer-vision', 'convolutional-neural-networks', 'deep-rl',
+                                'classification', 'training'}
         self.posts_df = None
 
     @staticmethod
@@ -23,7 +25,7 @@ class ComputerScienceSEQuestionAnalyzer:
         posts_data = []
         for post in root.findall(".//row[@PostTypeId='1']"):
             post_data = post.attrib
-            if any(tag in post_data.get('Tags', '') for tag in self.cs_related_tags):
+            if any(tag in post_data.get('Tags', '') for tag in self.ai_related_tags):
                 posts_data.append({
                     'Id': post_data.get('Id'),
                     'Title': post_data.get('Title'),
@@ -47,13 +49,12 @@ class ComputerScienceSEQuestionAnalyzer:
             for question, count in most_common_questions:
                 file.write(f"{question} (Occurrences: {count})\n")
 
-file_path_cs = 'cs.stackexchange.com/Posts.xml'
-cs_analyzer = ComputerScienceSEQuestionAnalyzer(file_path_cs)
+file_path_ai = '../ai.stackexchange.com/Posts.xml'
+ai_analyzer = AISEQuestionAnalyzer(file_path_ai)
 
-cs_analyzer.load_and_filter_questions()
+ai_analyzer.load_and_filter_questions()
 
-most_common_cs_questions = cs_analyzer.get_most_common_questions()
-
-output_file = 'most_common_cs_questions.txt'
-cs_analyzer.save_most_common_questions_to_file(output_file)
+most_common_ai_questions = ai_analyzer.get_most_common_questions()
+output_file = 'most_common_ai_questions.txt'
+ai_analyzer.save_most_common_questions_to_file(output_file)
 

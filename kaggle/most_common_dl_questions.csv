@@ -1,0 +1,112 @@
+Question,Occurrences
+ What is padding,1
+ Why don't we use the Relu activation function in the output layer,1
+ Would you prefer gradient boosting trees model or logistic regression when doing text classification with bag of words,1
+" How do you get sentence meanings from word embeddings, considering the position of words in the sentence",1
+ What are some advantages of using character embeddings instead of word embeddings,1
+ what is WordVec,1
+ What are word embeddings Why are they useful,1
+ Why Tanh activation function preferred over sigmoid,1
+" difference between various Activation functions such as Sigmoid , tanh, Softmax, ReLU, Leaky ReLU",1
+ Why Sigmoid or Tanh is not preferred to be used as the activation function in the hidden layer of the neural network,1
+ What is RNN and How does an RNN work,1
+" Give examples in which a many-to-one RNN architecture is appropriate, Give examples in which a many-to-one RNN architecture is appropriate",1
+ What can go wrong if we use a linear activation instead of ReLU,1
+ Why is Rectified Linear Unit a good activation function,1
+ What are the advantages and disadvantages of bag of words,1
+ What is the range of activation functions,1
+ Explain three different types of activation functions,1
+ What is an activation function and discuss the use of an activation function,1
+ Is dropout used on the test set,1
+ What is the difference between online and batch learning,1
+" What do you mean by Dropout and Batch Normalization, When and why use",1
+ Describe the architecture of a typical Convolutional Neural Network,1
+ What are three primary convolutional neural network layers How are they commonly put together,1
+ Define Term Freuency & Inverse Document Freuency Tf-idf and how to use it for converting text to vector,1
+ How does CNN help in translation and rotation invariance of images,1
+ What happens to the predictions of a CNN if an image is rotated,1
+ What is bag of words How we can use it for text vectorization,1
+ What is the main difference between Adam and SGD,1
+ What problem does Bi-LSTM solve instead of only LSTM,1
+ How does BatchNormalization differ in training and inferencing,1
+ Both decision trees and deep neural networks are non-linear classifier ie they separates the space by complicated decision boundary Why then it is so much easier for us to intuitively follow a decision tree model vs a deep neural network,1
+ which one is more powerful a layer decision tree or a -layer neural network without any activation function --> Hint non-linearity,1
+ Why large filter sizes in early layers can be a bad choice How to choose filter size,1
+ What is backpropagation How does it work Why do we need it,1
+ Suppose you have a NN with layers and ReLU activations What will happen if we initialize all the weights with the same value,1
+ Why weights are initialized with small random numbers in a neural network What happens when weights are all or constant values,1
+ How would you initialize weights in a neural network,1
+ On a simplified and fundamental scale what makes the newly developed BERT model better than traditional NLP models,1
+ Give a simple mathematical argument why a mini-batch version of such ML algorithm might be computationally more efficient than a training with full data set,1
+" When using mini batch gradient descent, why is it important to shuffle the data",1
+ How does batch size affect training of neural networks,1
+ Why we generally use Softmax non-linearity function as the last operation in-network,1
+ What are the advantages and disadvantages of SGD over gradient descent,1
+ Why would you use many small convolutional kernels such as x rather than a few large onesWhy would you use many small convolutional kernels such as x rather than a few large ones,1
+ Why do we use convolutions for images rather than just Fully Connected layers,1
+ What are the advantages of parameter sharing in case of convolution,1
+ What is a convolutional layer & Why do we actually need convolutions Can we use fully-connected layers for that,1
+ Why do segmentation CNNs typically have an encoder-decoder style / structure,1
+ Describe two ways to visualize features of a CNN in an image classification task,1
+ What are some advantages in using a CNN (convolutional neural network rather than a DNN (dense neural network in an image classification task,1
+ How can we use CNN for text classification,1
+ How would you choose the number of filters and the filter size at each CNN layer,1
+ When would you use GD over SDG and vice-versa,1
+" What is the difference between stochastic gradient descent SGD and gradient descent GD, Batch gradient descent, Stochastic gradient descent, Mini-batch gradient descent , what are the pros and cons for each of them",1
+ What is the difference between LSTM and GRU,1
+ How Does an LSTM Network Work,1
+ Sigmoid Vs Softmax,1
+ What Are the Different Layers on CNN,1
+ Difference between convex and non-convex cost function,1
+ What is multi-task learning When should it be used,1
+ What is transfer learning have you used it before,1
+ What is ReLU How is it better than sigmoid or tanh,1
+ Explain gates used in LSTM with their functions,1
+ What is a local optimumWhat is a local optimum,1
+ What are Syntactic and Semantic Analysis,1
+ What is backward and forward propagation,1
+ Explain Generative Adversarial Network,1
+ How is fastText different from wordvec,1
+ What makes CNNs translation invariant,1
+ How is wordvec different from Glove,1
+ Explain the difference between an epoch a batch and an iteration,1
+ How do you extract features in NLP,1
+ How do you preprocess text in NLP,1
+ Explain the masked language model,1
+ What is Named-Entity Recognition,1
+ What is sigmoid What does it do,1
+ What is the Computational Graph,1
+ What is the idea behind GANs,1
+ What is back propagation,1
+ What is topic modeling,1
+ What is tokenization,1
+ What is PoS Tagging,1
+ Why do we remove stop words When do we not remove them,1
+ What is the difference between NLP and NLU,1
+ How to handle exploding gradient problem,1
+ Do gradient descent methods always converge at the same point,1
+ How to know whether your model is suffering from the problem of Exploding Gradients,1
+ Explain why dropout in a neural network acts as a regularizer,1
+ What is a dropout layer and how does it help a neural network,1
+ What is the difference between machine learning and deep learning,1
+ What are the different Deep Learning Frameworks,1
+ What is the use of the leaky ReLU function,1
+ How to handle dying node problems in case of ReLU activation function,1
+ difference between Vanishing gradient Vs Exploding gradient,1
+ What is vanishing gradient descent,1
+ What are autoencoders Explain the different layers of autoencoders and mention three practical usages of them,1
+ What is gradient descent How does it work,1
+ How can you use neural nets for text classification and computer vision,1
+ For online learning which one would you prefer SGD or Adagrad and why,1
+ How large should be N for our bag of words when using N-grams,1
+ What are N-grams How can we use them,1
+ How to Select a Batch Size Will selecting a batch size produce better or worse results?,1
+ Describe the structure of Artificial Neural Networks & RNN(recurrent neural network),1
+ What is pooling in CNN Why do we need it,1
+ For infrequent/rare words which among CBOW and SkipGram should be used for wordvec training,1
+ How to compute an inverse matrix faster by playing around with some computational tricks,1
+ What do you understand by Boltzmann Machine and Restricted Boltzmann Machines,1
+" In node2vec, what does embedding represent topological similarity or nearness",1
+ Is it always bad to have local optimaIs it always bad to have local optima,1
+ What Is a Multi-layer Perceptron MLPWhat Is a Multi-layer Perceptron MLP,1
+ If you could take advantage of multiple CPU cores would you prefer a boosted-tree algorithm over a random forest,1

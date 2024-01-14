@@ -3,14 +3,11 @@ import xml.etree.ElementTree as ET
 import re
 from collections import Counter
 
-
-class AISEQuestionAnalyzer:
+class DataScienceSEQuestionAnalyzer:
     def __init__(self, file_path):
         self.file_path = file_path
-        self.ai_related_tags = {'artificial-intelligence', 'neural-networks', 'machine-learning',
-                                'deep-learning', 'reinforcement-learning', 'natural-language-processing',
-                                'computer-vision', 'convolutional-neural-networks', 'deep-rl',
-                                'classification', 'training'}
+        self.ds_related_tags = {'data-science', 'machine-learning', 'statistics', 'data-analysis', 'python',
+                                'r', 'big-data', 'data-mining', 'pandas', 'numpy'}
         self.posts_df = None
 
     @staticmethod
@@ -25,7 +22,7 @@ class AISEQuestionAnalyzer:
         posts_data = []
         for post in root.findall(".//row[@PostTypeId='1']"):
             post_data = post.attrib
-            if any(tag in post_data.get('Tags', '') for tag in self.ai_related_tags):
+            if any(tag in post_data.get('Tags', '') for tag in self.ds_related_tags):
                 posts_data.append({
                     'Id': post_data.get('Id'),
                     'Title': post_data.get('Title'),
@@ -37,7 +34,7 @@ class AISEQuestionAnalyzer:
 
     def get_most_common_questions(self, num_questions=10):
         if self.posts_df is None:
-            return "Data not loaded. Please load data using load_and_filter_posts() method."
+            return "Data not loaded. Please load data using load_and_filter_questions() method."
 
         question_titles = self.posts_df[self.posts_df['CleanTitle'].str.endswith('?')]['CleanTitle']
         question_counter = Counter(question_titles)
@@ -49,12 +46,12 @@ class AISEQuestionAnalyzer:
             for question, count in most_common_questions:
                 file.write(f"{question} (Occurrences: {count})\n")
 
-file_path_ai = 'ai.stackexchange.com/Posts.xml'
-ai_analyzer = AISEQuestionAnalyzer(file_path_ai)
+file_path = '../datascience.stackexchange.com/Posts.xml'
+ds_analyzer = DataScienceSEQuestionAnalyzer(file_path)
 
-ai_analyzer.load_and_filter_questions()
+ds_analyzer.load_and_filter_questions()
 
-most_common_ai_questions = ai_analyzer.get_most_common_questions()
-output_file = 'most_common_ai_questions.txt'
-ai_analyzer.save_most_common_questions_to_file(output_file)
+most_common_ds_questions = ds_analyzer.get_most_common_questions()
 
+output_file = 'most_common_ds_questions.txt'
+ds_analyzer.save_most_common_questions_to_file(output_file)
