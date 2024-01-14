@@ -43,11 +43,18 @@ class AISEQuestionAnalyzer:
         question_counter = Counter(question_titles)
         return question_counter.most_common(num_questions)
 
+    def save_most_common_questions_to_file(self, output_file):
+        most_common_questions = self.get_most_common_questions()
+        with open(output_file, 'w') as file:
+            for question, count in most_common_questions:
+                file.write(f"{question} (Occurrences: {count})\n")
+
 file_path_ai = 'ai.stackexchange.com/Posts.xml'
 ai_analyzer = AISEQuestionAnalyzer(file_path_ai)
 
-ai_analyzer.load_and_filter_posts()
+ai_analyzer.load_and_filter_questions()
 
 most_common_ai_questions = ai_analyzer.get_most_common_questions()
-print(most_common_ai_questions)
+output_file = 'most_common_ai_questions.txt'
+ai_analyzer.save_most_common_questions_to_file(output_file)
 

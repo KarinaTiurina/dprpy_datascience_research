@@ -34,17 +34,24 @@ class DataScienceSEQuestionAnalyzer:
 
     def get_most_common_questions(self, num_questions=10):
         if self.posts_df is None:
-            return "Data not loaded. Please load data using load_and_filter_posts() method."
+            return "Data not loaded. Please load data using load_and_filter_questions() method."
 
         question_titles = self.posts_df[self.posts_df['CleanTitle'].str.endswith('?')]['CleanTitle']
         question_counter = Counter(question_titles)
         return question_counter.most_common(num_questions)
 
+    def save_most_common_questions_to_file(self, output_file):
+        most_common_questions = self.get_most_common_questions()
+        with open(output_file, 'w') as file:
+            for question, count in most_common_questions:
+                file.write(f"{question} (Occurrences: {count})\n")
 
 file_path = 'datascience.stackexchange.com/Posts.xml'
 ds_analyzer = DataScienceSEQuestionAnalyzer(file_path)
 
-ds_analyzer.load_and_filter_posts()
+ds_analyzer.load_and_filter_questions()
 
 most_common_ds_questions = ds_analyzer.get_most_common_questions()
-print(most_common_ds_questions)
+
+output_file = 'most_common_ds_questions.txt'
+ds_analyzer.save_most_common_questions_to_file(output_file)

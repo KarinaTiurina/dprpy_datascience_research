@@ -41,11 +41,19 @@ class ComputerScienceSEQuestionAnalyzer:
         question_counter = Counter(question_titles)
         return question_counter.most_common(num_questions)
 
+    def save_most_common_questions_to_file(self, output_file):
+        most_common_questions = self.get_most_common_questions()
+        with open(output_file, 'w') as file:
+            for question, count in most_common_questions:
+                file.write(f"{question} (Occurrences: {count})\n")
+
 file_path_cs = 'cs.stackexchange.com/Posts.xml'
 cs_analyzer = ComputerScienceSEQuestionAnalyzer(file_path_cs)
 
-cs_analyzer.load_and_filter_posts()
+cs_analyzer.load_and_filter_questions()
 
 most_common_cs_questions = cs_analyzer.get_most_common_questions()
-print(most_common_cs_questions)
+
+output_file = 'most_common_cs_questions.txt'
+cs_analyzer.save_most_common_questions_to_file(output_file)
 
