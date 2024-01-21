@@ -10,5 +10,5 @@
 ## Kaggle data:
 1. Data Science Salary 2021 to 2023
 Link: # https://www.kaggle.com/datasets/harishkumardatalab/data-science-salary-2021-to-2023
-'Data Science Salary 2021 to 2023.csv' file should be downloaded copied to 'data' folder
+'Data Science Salary 2021 to 2023.csv' file should be downloaded and copied to 'data' folder
 
