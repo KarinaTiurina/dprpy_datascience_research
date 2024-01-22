@@ -29,10 +29,30 @@ class AISEQuestionAnalyzer:
                 posts_data.append({
                     'Id': post_data.get('Id'),
                     'Title': post_data.get('Title'),
-                    'Tags': post_data.get('Tags')
+                    'Tags': post_data.get('Tags'),
+                    'CreationYear': post_data.get('CreationDate')[:4]
                 })
 
         self.posts_df = pd.DataFrame(posts_data)
+        self.posts_df["CreationYear"] = self.posts_df["CreationYear"].astype(int)
+        self.posts_df['CleanTitle'] = self.posts_df['Title'].apply(self.clean_html)
+
+    def load_and_filter_questions_all_tags(self):
+        tree = ET.parse(self.file_path)
+        root = tree.getroot()
+
+        posts_data = []
+        for post in root.findall(".//row[@PostTypeId='1']"):
+            post_data = post.attrib
+            posts_data.append({
+                'Id': post_data.get('Id'),
+                'Title': post_data.get('Title'),
+                'Tags': post_data.get('Tags'),
+                'CreationYear': post_data.get('CreationDate')[:4]
+            })
+
+        self.posts_df = pd.DataFrame(posts_data)
+        self.posts_df["CreationYear"] = self.posts_df["CreationYear"].astype(int)
         self.posts_df['CleanTitle'] = self.posts_df['Title'].apply(self.clean_html)
 
     def get_most_common_questions(self, num_questions=10):
@@ -49,12 +69,16 @@ class AISEQuestionAnalyzer:
             for question, count in most_common_questions:
                 file.write(f"{question} (Occurrences: {count})\n")
 
-file_path_ai = '../ai.stackexchange.com/Posts.xml'
-ai_analyzer = AISEQuestionAnalyzer(file_path_ai)
+    def getPostsCountByYear(self):
+        return self.posts_df.groupby('CreationYear')['Id'].count().reset_index(name="Count")
 
-ai_analyzer.load_and_filter_questions()
+if __name__ == "__main__":
+    file_path_ai = '../ai.stackexchange.com/Posts.xml'
+    ai_analyzer = AISEQuestionAnalyzer(file_path_ai)
 
-most_common_ai_questions = ai_analyzer.get_most_common_questions()
-output_file = 'most_common_ai_questions.txt'
-ai_analyzer.save_most_common_questions_to_file(output_file)
+    ai_analyzer.load_and_filter_questions()
+
+    most_common_ai_questions = ai_analyzer.get_most_common_questions()
+    output_file = 'most_common_ai_questions.txt'
+    ai_analyzer.save_most_common_questions_to_file(output_file)
 

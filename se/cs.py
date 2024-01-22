@@ -27,10 +27,30 @@ class ComputerScienceSEQuestionAnalyzer:
                 posts_data.append({
                     'Id': post_data.get('Id'),
                     'Title': post_data.get('Title'),
-                    'Tags': post_data.get('Tags')
+                    'Tags': post_data.get('Tags'),
+                    'CreationYear': post_data.get('CreationDate')[:4]
                 })
 
         self.posts_df = pd.DataFrame(posts_data)
+        self.posts_df["CreationYear"] = self.posts_df["CreationYear"].astype(int)
+        self.posts_df['CleanTitle'] = self.posts_df['Title'].apply(self.clean_html)
+
+    def load_and_filter_questions_all_tags(self):
+        tree = ET.parse(self.file_path)
+        root = tree.getroot()
+
+        posts_data = []
+        for post in root.findall(".//row[@PostTypeId='1']"):
+            post_data = post.attrib
+            posts_data.append({
+                'Id': post_data.get('Id'),
+                'Title': post_data.get('Title'),
+                'Tags': post_data.get('Tags'),
+                'CreationYear': post_data.get('CreationDate')[:4]
+            })
+
+        self.posts_df = pd.DataFrame(posts_data)
+        self.posts_df["CreationYear"] = self.posts_df["CreationYear"].astype(int)
         self.posts_df['CleanTitle'] = self.posts_df['Title'].apply(self.clean_html)
 
     def get_most_common_questions(self, num_questions=10):
@@ -46,14 +66,18 @@ class ComputerScienceSEQuestionAnalyzer:
         with open(output_file, 'w') as file:
             for question, count in most_common_questions:
                 file.write(f"{question} (Occurrences: {count})\n")
+    
+    def getPostsCountByYear(self):
+        return self.posts_df.groupby('CreationYear')['Id'].count().reset_index(name="Count")
 
-file_path_cs = '../cs.stackexchange.com/Posts.xml'
-cs_analyzer = ComputerScienceSEQuestionAnalyzer(file_path_cs)
+if __name__ == "__main__":
+    file_path_cs = '../cs.stackexchange.com/Posts.xml'
+    cs_analyzer = ComputerScienceSEQuestionAnalyzer(file_path_cs)
 
-cs_analyzer.load_and_filter_questions()
+    cs_analyzer.load_and_filter_questions()
 
-most_common_cs_questions = cs_analyzer.get_most_common_questions()
+    most_common_cs_questions = cs_analyzer.get_most_common_questions()
 
-output_file = 'most_common_cs_questions.txt'
-cs_analyzer.save_most_common_questions_to_file(output_file)
+    output_file = 'most_common_cs_questions.txt'
+    cs_analyzer.save_most_common_questions_to_file(output_file)
 
