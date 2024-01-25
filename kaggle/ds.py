@@ -1,12 +1,19 @@
 import pandas as pd
 
-file_path = 'ds.kaggle/deeplearning_questions.csv'
-df = pd.read_csv(file_path)
 
-question_counts = df['DESCRIPTION'].value_counts()
+def get_top_questions(file_path, top_n):
+    df = pd.read_csv(file_path)
 
-question_counts_df = question_counts.reset_index()
-question_counts_df.columns = ['Question', 'Occurrences']
+    if 'DESCRIPTION' not in df.columns:
+        raise ValueError("Column 'DESCRIPTION' not found in the dataframe.")
 
-output_file_path_pandas = 'most_common_dl_questions.csv'
-question_counts_df.to_csv(output_file_path_pandas, index=False)
+    question_counts = df['DESCRIPTION'].value_counts()
+
+    question_counts_df = question_counts.reset_index()
+    question_counts_df.columns = ['Question', 'Occurrences']
+
+    top_questions_df = question_counts_df.head(top_n)
+
+    return top_questions_df
+
+
